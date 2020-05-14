@@ -1,0 +1,56 @@
+spring.profiles.active: local
+---
+spring:
+  profiles: local
+  http:
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
+  devtools.restart.enabled: true
+  output.ansi.enabled: ALWAYS
+  freemarker:
+    suffix: .html
+    settings:
+      datetime_format: yyyy-MM-dd HH:mm:ss
+      date_format: yyyy-MM-dd
+      time_format: HH:mm:ss
+      number_format: 0.######
+      boolean_format: true,false
+      auto_import: "'spring.ftl' as spring"
+      whitespace_stripping: true
+      default_encoding: UTF-8
+      tag_syntax: auto_detect
+      url_escaping_charset: UTF-8
+      template_update_delay: 3
+      locale: zh_CN
+      cache_storage: strong:20,soft:250
+  resources.chain.strategy:
+    content.enabled: true
+    fixed.version: 1
+  mvc:
+    favicon.enabled: false
+    static-path-pattern: /**
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    pool:
+#    max-idle: 10
+
+jedis:
+  host: 127.0.0.1
+  port: 6379
+  maxTotal: 100
+  maxIdle: 10
+  maxWaitMillis: 100000
+
+#logging:
+#  level.root: info
+#  level.com.duckbobby: info
+#  path: '/Users/zhangyuhang/log/log_duckyou/'
+#  file: preserver
+servlet:
+  container:
+    port: 80
+    timeout: 30
+
+

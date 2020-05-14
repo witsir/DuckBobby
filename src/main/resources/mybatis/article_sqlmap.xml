@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duckbobby.dao.ArticleDao" >
+    <resultMap id="article" type="com.duckbobby.model.Article" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="contentId" property="contentId" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="abstr" property="abstr" jdbcType="VARCHAR" />
+        <result column="categoryId" property="categoryId" jdbcType="VARCHAR" />
+        <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+        <result column="createDate" property="createDate" jdbcType="VARCHAR" />
+        <result column="top" property="top" jdbcType="VARCHAR" />
+        <result column="keyID" property="keyID" jdbcType="VARCHAR" />
+        <result column="keyValue" property="keyValue" jdbcType="VARCHAR" />
+        <result column="categoryValue" property="categoryValue" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="content" type="com.duckbobby.model.Content" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findArticleByContentId" resultMap="article" parameterType="java.lang.String">
+        select * from article where contentId = #{contentId}
+    </select>
+
+    <select id="findContentByContentId" resultMap="content" parameterType="java.lang.String">
+        select * from content where id = #{contentId}
+    </select>
+
+    <select id="getArticleList" resultMap="article" parameterType="java.lang.Integer">
+        select * from article order by createDate desc limit #{num},5
+    </select>
+
+    <insert id="createArticle" parameterType="com.duckbobby.model.Article" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contentId != null">
+                contentId,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="abstr != null">
+                abstr,
+            </if>
+            <if test="categoryId != null">
+                categoryId,
+            </if>
+            <if test="categoryValue != null">
+                categoryValue,
+            </if>
+            <if test="imgurl != null">
+                imgurl,
+            </if>
+            <if test="keyID != null">
+                keyID,
+            </if>
+            <if test="keyValue != null">
+                keyValue,
+            </if>
+            <if test="createDate != null">
+                createDate
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contentId != null">
+                #{contentId},
+            </if>
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="abstr != null">
+                #{abstr},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId},
+            </if>
+            <if test="categoryValue != null">
+                #{categoryValue},
+            </if>
+            <if test="imgurl != null">
+                #{imgurl},
+            </if>
+            <if test="keyID != null">
+                #{keyID},
+            </if>
+            <if test="keyValue != null">
+                #{keyValue},
+            </if>
+            <if test="createDate != null">
+                #{createDate}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="createContent" parameterType="com.duckbobby.model.Content" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into content
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                content
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                #{content}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateContent" parameterType="com.duckbobby.model.Content">
+        update content set content = #{content} where id = #{id}
+    </update>
+
+    <select id="getArticleByCategoryId" resultMap="article">
+        select * from article WHERE  categoryId = #{id} order by createDate desc limit #{num},5
+    </select>
+
+    <select id="getTopArticleList" resultMap="article" parameterType="java.lang.String">
+        select * from article WHERE top = #{top}
+    </select>
+
+    <select id="getArticleSize" resultType="java.lang.Integer">
+        select count(*) from article
+    </select>
+
+    <select id="getArticleSizeByCategoryId" resultType="java.lang.Integer">
+        select count(*) from article where categoryId = #{categoryId}
+    </select>
+
+    <select id="getArticleByKeyword" resultMap="article">
+        select * from article WHERE  keyvalue LIKE concat(concat('%',#{keyword}),'%')
+        order by createDate desc limit #{num},5
+    </select>
+
+    <select id="getArticleSizeByKeyword" resultType="java.lang.Integer">
+        select count(*) from article where keyvalue LIKE concat(concat('%',#{keyword}),'%')
+    </select>
+
+    <update id="updateArticle" parameterType="com.duckbobby.model.Article">
+        update article set
+        contentId = #{contentId},
+        title = #{title},
+        abstr = #{abstr}
+         where id = #{id}
+    </update>
+    <delete id="deleteArticle" parameterType="java.lang.Integer" >
+        delete from article where contentId =#{contentId}
+    </delete>
+
+</mapper>

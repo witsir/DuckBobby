@@ -1,0 +1,15 @@
+.show-content{
+    height: 500px;
+}
+.field{
+    padding: 10px;
+}
+.markdown-editor{
+    padding: 10px;
+}
+.sub-form{
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

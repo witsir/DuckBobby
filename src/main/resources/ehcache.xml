@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+    <diskStore path="java.io.tmpdir/Tmp_EhCache" />
+    <defaultCache eternal="false" maxElementsInMemory="1000" overflowToDisk="false" diskPersistent="false"
+                  timeToIdleSeconds="0" timeToLiveSeconds="600" memoryStoreEvictionPolicy="LRU" />
+    <!--最新文章缓存1天-->
+    <cache name="newArticle" eternal="false" maxElementsInMemory="100" overflowToDisk="false" diskPersistent="false"
+           timeToIdleSeconds="0" timeToLiveSeconds="3600" memoryStoreEvictionPolicy="LRU" />
+    <!--类别缓存一天-->
+    <cache name="category" eternal="false" maxElementsInMemory="100" overflowToDisk="false" diskPersistent="false"
+           timeToIdleSeconds="0" timeToLiveSeconds="86400" memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="topArticle" eternal="false" maxElementsInMemory="100" overflowToDisk="false" diskPersistent="false"
+           timeToIdleSeconds="0" timeToLiveSeconds="86400" memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="good" eternal="false" maxElementsInMemory="100" overflowToDisk="false" diskPersistent="false"
+           timeToIdleSeconds="0" timeToLiveSeconds="86400" memoryStoreEvictionPolicy="LRU" />
+
+</ehcache>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duckbobby.dao.IPcountDao">
+    <insert id="addIPCount" parameterType="com.duckbobby.model.IPCount" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into ipcount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="url != null">
+                url,
+            </if>
+            <if test="accessTime != null">
+                accesstime,
+            </if>
+            <if test="IPAddress != null">
+                ipaddress,
+            </if>
+            <if test="filterType != null">
+                filtertype
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="url != null">
+                #{url},
+            </if>
+            <if test="accessTime != null">
+                #{accessTime},
+            </if>
+            <if test="IPAddress != null">
+                #{IPAddress},
+            </if>
+            <if test="filterType != null">
+                #{filterType}
+            </if>
+        </trim>
+    </insert>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duckbobby.dao.GoodDao" >
+    <resultMap id="good" type="com.duckbobby.model.Good" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="chiContent" property="chiContent" jdbcType="VARCHAR" />
+        <result column="engContent" property="engContent" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findGood" resultMap="good">
+        SELECT * FROM good WHERE id >= ((SELECT MAX(id) FROM good)-(SELECT MIN(id) FROM good)) * RAND() + (SELECT MIN(id) FROM good)  LIMIT 1
+    </select>
+
+
+</mapper>
