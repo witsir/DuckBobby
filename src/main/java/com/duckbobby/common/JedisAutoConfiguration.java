@@ -1,6 +1,6 @@
 package com.duckbobby.common;
 
-import com.duckbobby.utils.RedisClient;
+import com.duckbobby.utils.myRedisClient;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,8 +22,8 @@ import redis.clients.jedis.JedisPoolConfig;
  * Created by witsir on 2020/04/04.
  */
 @Configuration
-@EnableConfigurationProperties(JedisProperties.class) //开启属性注入,通过@autowired注入
-@ConditionalOnClass(RedisClient.class) //判断这个类是否在classpath中存在
+@EnableConfigurationProperties({JedisProperties.class,SqlProp.class}) //开启属性注入,通过@autowired注入
+@ConditionalOnClass(myRedisClient.class) //判断这个类是否在classpath中存在
 public class JedisAutoConfiguration {
 
 
@@ -40,16 +40,16 @@ public class JedisAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(RedisClient.class) //容器中如果没有RedisClient这个类,那么自动配置这个RedisClient
-    public RedisClient redisClient(@Qualifier("jedisPool") JedisPool pool) {
-        RedisClient redisClient = new RedisClient();
-        redisClient.setJedisPool(pool);
-        return redisClient;
+    @ConditionalOnMissingBean(myRedisClient.class) //容器中如果没有RedisClient这个类,那么自动配置这个RedisClient
+    public myRedisClient redisClient(@Qualifier("jedisPool") JedisPool pool) {
+        myRedisClient myRedisClient = new myRedisClient();
+        myRedisClient.setJedisPool(pool);
+        return myRedisClient;
     }
 
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory)
-    {
+    //RedisConnectionFactory connot be autowired ?
+    //@Bean
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);

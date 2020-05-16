@@ -5,6 +5,7 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.InputStream;
 import java.time.LocalDateTime;
@@ -15,13 +16,13 @@ import java.util.Map;
  * 七牛工具类
  * Created by witsir on 2017/12/15.
  */
-public class QiNiuUtils {
 
+public class QiNiuUtils {
+        static String accessKey = "yHt5FarMck31aIcUvTrD7Bxit15WnExmgUKtkTRF";
+        static String secretKey = "fpKBdxPpWpCKHWGd8a3VUsRY7tDCfQc8UF4qUuay";
+        static String bucket = "duckbobby1";
     public static Map updataFile(InputStream inputStream, String name) {
         Map<String, String> map = new HashMap<>();
-        String accessKey = "yHt5FarMck31aIcUvTrD7Bxit15WnExmgUKtkTRF";
-        String secretKey = "fpKBdxPpWpCKHWGd8a3VUsRY7tDCfQc8UF4qUuay";
-        String bucket = "duckbobby1";
         //构造一个带指定Zone对象的配置类
         Configuration cfg = new Configuration(Region.region0());
         //...其他参数参考类注释

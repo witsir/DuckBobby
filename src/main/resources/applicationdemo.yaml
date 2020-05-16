@@ -1,0 +1,109 @@
+spring.profiles.active: local
+---
+spring:
+  profiles: local
+  http:
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
+  devtools.restart.enabled: true
+  output.ansi.enabled: ALWAYS
+  freemarker:
+    suffix: .html
+    settings:
+      datetime_format: yyyy-MM-dd HH:mm:ss
+      date_format: yyyy-MM-dd
+      time_format: HH:mm:ss
+      number_format: 0.######
+      boolean_format: true,false
+      auto_import: "'spring.ftl' as spring"
+      whitespace_stripping: true
+      default_encoding: UTF-8
+      tag_syntax: auto_detect
+      url_escaping_charset: UTF-8
+      template_update_delay: 3
+      locale: zh_CN
+      cache_storage: strong:20,soft:250
+  resources.chain.strategy:
+    content.enabled: true
+    fixed.version: 1
+  mvc:
+    favicon.enabled: false
+    static-path-pattern: /**
+jedis:
+  host: 127.0.0.1
+  port: 6379
+  maxTotal: 100
+  maxIdle: 10
+  maxWaitMillis: 100000
+server:
+  port: 8080
+mysqlconfig:
+  sqlUsername: yourname
+  sqlUserPassword: yourpassword
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    pool:
+#    max-idle: 10
+#logging:
+#  level.root: info
+#  level.com.duckbobby: info
+#  path: '/Users/zhangyuhang/log/log_duckyou/'
+#  file: preserver
+---
+spring:
+  profiles: prod
+  http:
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
+  devtools.restart.enabled: true
+  output.ansi.enabled: ALWAYS
+  freemarker:
+    suffix: .html
+    settings:
+      datetime_format: yyyy-MM-dd HH:mm:ss
+      date_format: yyyy-MM-dd
+      time_format: HH:mm:ss
+      number_format: 0.######
+      boolean_format: true,false
+      auto_import: "'spring.ftl' as spring"
+      whitespace_stripping: true
+      default_encoding: UTF-8
+      tag_syntax: auto_detect
+      url_escaping_charset: UTF-8
+      template_update_delay: 3
+      locale: zh_CN
+      cache_storage: strong:20,soft:250
+  resources.chain.strategy:
+    content.enabled: true
+    fixed.version: 1
+  mvc:
+    favicon.enabled: false
+    static-path-pattern: /**
+jedis:
+  host: 127.0.0.1
+  port: 6379
+  maxTotal: 100
+  maxIdle: 10
+  maxWaitMillis: 100000
+server:
+  port: 80
+mysqlconfig:
+  sqlUsername: root
+  sqlUserPassword: 910131
+  accessKey: yHt5FarMck31aIcUvTrD7Bxit15WnExmgUKtkTRF
+  secretKey: fpKBdxPpWpCKHWGd8a3VUsRY7tDCfQc8UF4qUuay
+  bucket: duckbobby1
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    pool:
+#    max-idle: 10
+#logging:
+#  level.root: info
+#  level.com.duckbobby: info
+#  path: '/Users/zhangyuhang/log/log_duckyou/'
+#  file: preserver
+

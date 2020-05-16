@@ -4,7 +4,7 @@ import com.duckbobby.dao.CategoryDao;
 import com.duckbobby.enums.KeyType;
 import com.duckbobby.model.Category;
 import com.duckbobby.service.CategoryService;
-import com.duckbobby.utils.RedisClient;
+import com.duckbobby.utils.myRedisClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +26,18 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 
     @Autowired
-    private RedisClient redisClient;
+    private myRedisClient myRedisClient;
 
     @Override
     @Cacheable(value = "category")
     public List<Category> getCategoryList() {
         List<Category> getCategoryList = null;
         try {
-            getCategoryList = redisClient.getList(KeyType.GET_CATEGORY_LIST.getValue());
+            getCategoryList = myRedisClient.getList(KeyType.GET_CATEGORY_LIST.getValue());
             logger.info("CategoryService实现类"+getCategoryList);
             if (null == getCategoryList) {
                 getCategoryList = categoryDao.getCategoryList();
-                redisClient.setList(KeyType.GET_CATEGORY_LIST.getValue(), getCategoryList);
+                myRedisClient.setList(KeyType.GET_CATEGORY_LIST.getValue(), getCategoryList);
             }
         } catch (Exception e) {
             logger.error("get Category List error：", e);
